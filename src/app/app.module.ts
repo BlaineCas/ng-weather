@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -16,22 +16,31 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ZipcodeEntryComponent,
-    ForecastsListComponent,
-    CurrentConditionsComponent,
-    MainPageComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule,
-    routing,
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
-  ],
-  providers: [LocationService, WeatherService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ZipcodeEntryComponent,
+        ForecastsListComponent,
+        CurrentConditionsComponent,
+        MainPageComponent,
+    ],
+    providers: [LocationService,
+      {
+        provide: APP_INITIALIZER, 
+        useFactory: (locationService: LocationService) => {
+            return () => locationService.init(); // Initialize the locations before the app is loaded for the first time
+        },
+        deps: [LocationService],
+        multi: true
+    },
+    WeatherService],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule,
+        routing,
+        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    ]
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+import { LocationService } from './location.service';
 import {Injectable, Signal, signal} from '@angular/core';
 import {Observable} from 'rxjs';
 
@@ -14,19 +15,31 @@ export class WeatherService {
   static ICON_URL = 'https://raw.githubusercontent.com/udacity/Sunshine-Version-2/sunshine_master/app/src/main/res/drawable-hdpi/';
   private currentConditions = signal<ConditionsAndZip[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private locationService: LocationService) { 
+    let locations = this.locationService.getLocations();
+    for (let loc of locations())
+      this.updateCurrentConditions(loc);
+  }
 
-  addCurrentConditions(zipcode: string): void {
+  updateCurrentConditions(zipcode: string): void {
     // Here we make a request to get the current conditions data from the API. Note the use of backticks and an expression to insert the zipcode
     this.http.get<CurrentConditions>(`${WeatherService.URL}/weather?zip=${zipcode},us&units=imperial&APPID=${WeatherService.APPID}`)
       .subscribe(data => this.currentConditions.update(conditions => [...conditions, {zip: zipcode, data}]));
   }
 
+  addCurrentConditions(zipcode: string): void {
+    this.updateCurrentConditions(zipcode);
+    this.locationService.addLocation(zipcode);
+  }
+    
   removeCurrentConditions(zipcode: string) {
+    this.locationService.removeLocation(zipcode);
     this.currentConditions.update(conditions => {
       for (let i in conditions) {
-        if (conditions[i].zip == zipcode)
+        if (conditions[i].zip == zipcode) {
           conditions.splice(+i, 1);
+          break;
+        }
       }
       return conditions;
     })
@@ -42,7 +55,7 @@ export class WeatherService {
 
   }
 
-  getWeatherIcon(id): string {
+  getWeatherIcon(id: number): string {
     if (id >= 200 && id <= 232)
       return WeatherService.ICON_URL + "art_storm.png";
     else if (id >= 501 && id <= 511)

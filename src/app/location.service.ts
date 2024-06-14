@@ -7,7 +7,7 @@ export class LocationService {
 
   private locations: WritableSignal<string[]> = signal<string[]>([]);
 
-  constructor() {
+  init(): void {
     let locString = localStorage.getItem(LOCATIONS);
     if (locString) {
       this.locations.set(JSON.parse(locString));
