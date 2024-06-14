@@ -111,7 +111,8 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "style": "css"
+      "style": "css",
+      "project": "ng-weather" 
     },
     "@schematics/angular:directive": {
       "prefix": "app"

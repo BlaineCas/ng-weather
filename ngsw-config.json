@@ -21,14 +21,15 @@
       ]
     }
   }],
-  "dataGroups": [{
+  "dataGroups": [
+    {
       "name": "WeatherAPI",
       "urls": [
-        "http://api.openweathermap.org/data/**"
+        "https://api.openweathermap.org/data/**"
       ],
       "cacheConfig": {
-        "maxAge": "6h",
-        "strategy": "freshness"
+        "maxAge": "2h",
+        "strategy": "performance"
       }
     }]
 }
