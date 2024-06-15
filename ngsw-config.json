@@ -25,7 +25,8 @@
     {
       "name": "WeatherAPI",
       "urls": [
-        "https://api.openweathermap.org/data/2.5/**"
+        "https://api.openweathermap.org/data/2.5/forecast/*",
+        "https://api.openweathermap.org/data/2.5/*"
       ],
       "cacheConfig": {
         "maxAge": "2h",

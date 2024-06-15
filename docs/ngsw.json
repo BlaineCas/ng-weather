@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1718435462190,
+  "timestamp": 1718436482608,
   "index": "/ng-weather/index.html",
   "assetGroups": [
     {
@@ -45,7 +45,8 @@
     {
       "name": "WeatherAPI",
       "patterns": [
-        "https:\\/\\/api\\.openweathermap\\.org\\/data\\/2\\.5\\/.*"
+        "https:\\/\\/api\\.openweathermap\\.org\\/data\\/2\\.5\\/forecast\\/[^/]*",
+        "https:\\/\\/api\\.openweathermap\\.org\\/data\\/2\\.5\\/[^/]*"
       ],
       "strategy": "performance",
       "maxAge": 7200000,
