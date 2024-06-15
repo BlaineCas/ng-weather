@@ -33,7 +33,7 @@ import { TabComponent } from './components/tab/tab.component';
     HttpClientModule,
     RouterModule,
     routing,
-    ServiceWorkerModule.register('/ngsw-worker.js', {
+    ServiceWorkerModule.register('./ngsw-worker.js', {
       enabled: environment.production,
     }),
     TabsComponent,
