@@ -1,0 +1,14 @@
+<div class="tabs">
+  <div *ngFor="let tab of tabs; let i = index; trackBy: trackByFn" (click)="selectTab(tab)" class="tab__title btn btn-primary">
+    <span class="tab__title__text">
+      {{tab.header}}
+    </span>
+    <div (click)="removeTab(tab)" class="close">
+      &times;
+      <span class="sr-only">Close Tab</span>
+    </div>
+  </div>
+</div>
+<div>
+  <ng-content></ng-content>
+</div>

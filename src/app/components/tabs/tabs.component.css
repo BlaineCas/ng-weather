@@ -1,0 +1,26 @@
+.tabs {
+  display: flex;
+  overflow-x: auto;
+  margin-bottom: .5rem;
+  .tab__title {
+    display: flex;
+    width: fit-content;
+    margin-right: .4rem;
+    margin-bottom: .2rem;
+
+    .tab__title__text {
+      margin-right: 1rem;
+    }
+
+    .close {
+      color: white;
+      text-shadow: none;
+      opacity: 0.6;
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
+  }
+}

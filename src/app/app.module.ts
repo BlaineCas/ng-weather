@@ -14,6 +14,8 @@ import {routing} from "./app.routing";
 import {HttpClientModule} from "@angular/common/http";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { TabComponent} from "./components/tabs/tab/tab.component";
 
 @NgModule({
     declarations: [
@@ -24,14 +26,6 @@ import { environment } from '../environments/environment';
         MainPageComponent,
     ],
     providers: [LocationService,
-      {
-        provide: APP_INITIALIZER, 
-        useFactory: (locationService: LocationService) => {
-            return () => locationService.init(); // Initialize the locations before the app is loaded for the first time
-        },
-        deps: [LocationService],
-        multi: true
-    },
     WeatherService],
     bootstrap: [AppComponent],
     imports: [
@@ -41,6 +35,8 @@ import { environment } from '../environments/environment';
         RouterModule,
         routing,
         ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+        TabsComponent,
+        TabComponent,
     ]
 })
 export class AppModule { }
