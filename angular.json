@@ -11,7 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "docs",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
@@ -37,6 +37,7 @@
           "configurations": {
             "production": {
               "optimization": true,
+              "baseHref": "/ng-weather/",
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
