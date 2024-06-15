@@ -9,6 +9,8 @@ export class ZipcodeEntryComponent {
   constructor(private weatherService: WeatherService) {}
 
   addLocation(zipcode: string) {
-    this.weatherService.addCurrentConditions(zipcode);
+    if (zipcode.length > 0) {
+      this.weatherService.addCurrentConditions(zipcode);
+    }
   }
 }

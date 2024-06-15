@@ -17,7 +17,11 @@ export class WeatherService {
 
   constructor(private http: HttpClient, private locationService: LocationService) {
     let locations = this.locationService.getLocations();
-    for (let loc of locations()) this.updateCurrentConditions(loc);
+    for (let loc of locations()) {
+      if (loc.length > 0) {
+        this.updateCurrentConditions(loc);
+      }
+    }
   }
 
   updateCurrentConditions(zipcode: string): void {
@@ -26,7 +30,10 @@ export class WeatherService {
       .get<CurrentConditions>(
         `${WeatherService.URL}/weather?zip=${zipcode},us&units=imperial&APPID=${WeatherService.APPID}`
       )
-      .subscribe((data) => this.currentConditions.update((conditions) => [...conditions, { zip: zipcode, data }]));
+      .subscribe(
+        (data) => this.currentConditions.update((conditions) => [...conditions, { zip: zipcode, data }]),
+        (error) => console.log(`Error: ${error}`)
+      );
   }
 
   addCurrentConditions(zipcode: string): void {
