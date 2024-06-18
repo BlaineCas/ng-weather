@@ -16,6 +16,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TabComponent } from './components/tab/tab.component';
+import { CachingService } from './caching.service';
 
 @NgModule({
   declarations: [
@@ -33,11 +34,11 @@ import { TabComponent } from './components/tab/tab.component';
     HttpClientModule,
     RouterModule,
     routing,
+    TabsComponent,
+    TabComponent,
     ServiceWorkerModule.register('./ngsw-worker.js', {
       enabled: environment.production,
     }),
-    TabsComponent,
-    TabComponent,
   ],
 })
 export class AppModule {}

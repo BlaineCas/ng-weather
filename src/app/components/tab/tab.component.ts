@@ -14,7 +14,7 @@ export class TabComponent {
 
   active = false;
 
-  removeTab() {
+  removeTab(): void {
     this.onRemoveTab.emit(true);
   }
 }
